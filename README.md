@@ -1,5 +1,5 @@
 ### Description
-This repository hosts the Latent Variable Hierarchical Recurrent Encoder-Decoder RNN model with Gaussian and piecewise constant latent variables for generative dialog modeling, as well as the HRED baseline model.
+This repository hosts the Latent Variable Hierarchical Recurrent Encoder-Decoder RNN model with Gaussian and piecewise constant latent variables for generative dialog modeling, as well as the HRED baseline model. These models were proposed in the paper "Piecewise Latent Variables for Neural Variational Text Processing" by Serban et al.
 
 
 ### Truncated BPTT
@@ -60,19 +60,19 @@ where &lt;model_name&gt; is the name automatically generated during training, &l
 If you build on this work, we'd really appreciate it if you could cite our papers:
 
     Piecewise Latent Variables for Neural Variational Text Processing. Iulian V. Serban, Alexander G. Ororbia II, Joelle Pineau, Aaron Courville, Yoshua Bengio. 2017. https://arxiv.org/abs/1612.00377
-    
+
     A Hierarchical Latent Variable Encoder-Decoder Model for Generating Dialogues. Iulian V. Serban, Alessandro Sordoni, Ryan Lowe, Laurent Charlin, Joelle Pineau, Aaron Courville, Yoshua Bengio. 2016. http://arxiv.org/abs/1605.06069
 
     Building End-To-End Dialogue Systems Using Generative Hierarchical Neural Network Models. Iulian V. Serban, Alessandro Sordoni, Yoshua Bengio, Aaron Courville, Joelle Pineau. 2016. AAAI. http://arxiv.org/abs/1507.04808.
 
-    
+
 ### Reproducing Results in "Piecewise Latent Variables for Neural Variational Text Processing" 
 The results reported in the paper "Piecewise Latent Variables for Neural Variational Text Processing" by Serban et al. are based on the following model states found inside state.py:
 
-    prototype\_ubuntu\_GaussPiecewise\_NormOp\_VHRED\_Baseline\_Exp1 (HRED baseline)
-    prototype\_ubuntu\_GaussPiecewise\_NormOp\_VHRED\_Exp5 (P-VHRED)
-    prototype\_ubuntu\_GaussPiecewise\_NormOp\_VHRED\_Exp7 (G-VHRED)
-    prototype\_ubuntu\_GaussPiecewise\_NormOp\_VHRED\_Exp9 (H-VHRED)
+    prototype_ubuntu_GaussPiecewise_NormOp_VHRED_Baseline_Exp1 (HRED baseline)
+    prototype_ubuntu_GaussPiecewise_NormOp_VHRED_Exp5 (P-VHRED)
+    prototype_ubuntu_GaussPiecewise_NormOp_VHRED_Exp7 (G-VHRED)
+    prototype_ubuntu_GaussPiecewise_NormOp_VHRED_Exp9 (H-VHRED)
 
 To reproduce these results from scratch, you must follow these steps:
 
@@ -87,8 +87,10 @@ To reproduce these results from scratch, you must follow these steps:
    c) Train up the model. This takes about 2 weeks time!
       For example, for "prototype\_ubuntu\_GaussPiecewise\_NormOp\_VHRED\_Exp9" run:
 
-        THEANO_FLAGS=mode=FAST_RUN,device=cuda,floatX=float32 python train.py --prototype prototype\_ubuntu\_GaussPiecewise\_NormOp\_VHRED\_Exp9 &> Model_Output.txt
+        THEANO_FLAGS=mode=FAST_RUN,device=cuda,floatX=float32 python train.py --prototype prototype_ubuntu_GaussPiecewise_NormOp_VHRED_Exp9 &> Model_Output.txt
+
       The model will be saved inside the directory Output/.
+      If the machine runs out of GPU memory, reduce the batch size (bs) and maximum number of gradient steps (max_grad_steps) in the model state.
 
    d) Generate outputs using beam search with size 5 on the Ubuntu test set.
       To do this, run:
@@ -101,11 +103,12 @@ To reproduce these results from scratch, you must follow these steps:
    e) Compute performance using activity- and entity-based metrics.
       Follow the instructions given here: https://github.com/julianser/Ubuntu-Multiresolution-Tools.
 
-Following these steps takes some time. Therefore, we have also made available the pretrained models and precomputed model responses on the test set.
 
-You can find the pretrained models here:
+Following all steps to reproduce the results requires a few weeks time and, depending on your setup, may also require changing your Theano configuraiton and the state file. Therefore, we have also made available the trained models and the generated model responses on the test set.
 
-You can find the precomputed model responses in this repository inside "TestSet_BeamSearch_Outputs/".
+You can find the trained models here: https://drive.google.com/open?id=0B06gib_77EnxaDg2VkV1N1huUjg.
+
+You can find the model responses generated using beam search in this repository inside "TestSet_BeamSearch_Outputs/".
 
 
 ### Datasets
